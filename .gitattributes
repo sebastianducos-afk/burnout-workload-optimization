@@ -1,0 +1,8 @@
+# Normaliza finales de línea: evita problemas entre Windows (CRLF) y Linux/macOS (LF)
+* text=auto
+
+*.R    text
+*.md   text
+*.sh   text eol=lf
+*.yml  text eol=lf
+Makefile text eol=lf

@@ -1,0 +1,45 @@
+# =============================================================================
+# Salidas generadas por el pipeline (NO se versionan: se regeneran al ejecutar)
+# =============================================================================
+datos sinteticos/
+figures fase 2/
+data fase 3/
+fase 4/
+fase 5/
+fase_06_optimizacion/
+fase_07_evaluacion/
+
+# Ficheros de gráficos sueltos
+Rplots.pdf
+*.png
+*.pdf
+# ...pero conserva imágenes de documentación si las añades en docs/
+!docs/**/*.png
+!docs/**/*.pdf
+
+# =============================================================================
+# Artefactos de R / RStudio
+# =============================================================================
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+.Renviron
+
+# renv (si decides usarlo)
+renv/library/
+renv/local/
+renv/cellar/
+renv/lock/
+renv/python/
+renv/staging/
+
+# =============================================================================
+# Sistema operativo / editores
+# =============================================================================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*~
