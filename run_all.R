@@ -50,12 +50,21 @@ phases <- c(
   "Fase_4.R", "Fase_5.R", "Fase_6.R", "Fase_7.R"
 )
 
+# Localiza cada fase tanto si está en scripts/ como si está en la raíz del repo.
+find_phase <- function(name) {
+  candidatos <- c(file.path(scripts_dir, name), file.path(repo_root, name))
+  hit <- candidatos[file.exists(candidatos)]
+  if (length(hit) == 0)
+    stop("No se encuentra el script: ", name,
+         " (buscado en scripts/ y en la raíz del repo)")
+  hit[1]
+}
+
 # ── Ejecutar cada fase en un entorno limpio ───────────────────────────────────
 overall_start <- Sys.time()
 
 for (ph in phases) {
-  path <- file.path(scripts_dir, ph)
-  if (!file.exists(path)) stop("No se encuentra el script: ", path)
+  path <- find_phase(ph)
 
   cat("=================================================================\n")
   cat(sprintf(">> Ejecutando %s\n", ph))
