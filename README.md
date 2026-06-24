@@ -8,8 +8,28 @@ El proyecto está organizado en **7 fases encadenadas**: cada fase consume las s
 
 ---
 
+## ▶ Ejecutar online en 1 clic (sin instalar nada)
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/USUARIO/REPO/HEAD?urlpath=rstudio)
+
+Pulsa el botón **launch binder** (o el enlace) y, tras unos minutos de arranque, se abrirá **RStudio en el navegador** con el código y todas las dependencias (incluido GLPK) ya instaladas.
+
+**Instrucciones para quien abra el enlace:**
+
+1. Espera a que cargue RStudio.
+2. En la consola de RStudio (abajo a la izquierda), escribe:
+   ```r
+   source("run_all.R")
+   ```
+3. Pulsa Enter. El pipeline completo (Fases 1 → 7) se ejecutará y los resultados aparecerán en las carpetas del panel *Files*.
+
+> El enlace de arriba es una plantilla: sustituye `USUARIO/REPO` por tu usuario y repositorio de GitHub. En [Ejecutar online](#ejecutar-online-detalle) se explica cómo dejarlo activo en 3 pasos.
+
+---
+
 ## Tabla de contenidos
 
+- [Ejecutar online en 1 clic](#-ejecutar-online-en-1-clic-sin-instalar-nada)
 - [Arquitectura del pipeline](#arquitectura-del-pipeline)
 - [Requisitos](#requisitos)
 - [Instalación rápida](#instalación-rápida)
@@ -66,6 +86,24 @@ Cada fase escribe en su propia carpeta y la siguiente la lee. El orden es **estr
 Se instalan automáticamente con `install_dependencies.R` (ver más abajo).
 
 > **Importante:** `ROI.plugin.glpk` necesita la librería **GLPK** instalada en el sistema operativo *antes* de instalarlo. Las instrucciones por SO están justo debajo.
+
+---
+
+## Ejecutar online (detalle)
+
+Para tener tu **enlace de un clic** funcionando, súbelo una sola vez a GitHub (no hace falta saber `git`):
+
+1. **Crea un repositorio** en [github.com/new](https://github.com/new) (por ejemplo `burnout-workload-optimization`) y marca **Public**.
+2. **Sube los archivos:** en la página del repo, *Add file → Upload files*, arrastra **todo el contenido** de esta carpeta (incluyendo `scripts/`, `install.R`, `apt.txt`, `runtime.txt`, `run_all.R`) y haz *Commit*.
+3. **Tu enlace Binder** es:
+   ```
+   https://mybinder.org/v2/gh/TU_USUARIO/TU_REPO/HEAD?urlpath=rstudio
+   ```
+   Ábrelo una vez tú mismo: la primera vez Binder *construye* el entorno (tarda unos minutos); a partir de ahí, cualquiera que use el enlace entra mucho más rápido.
+
+Los archivos `apt.txt` (instala GLPK), `runtime.txt` (fija la versión de R) e `install.R` (instala los paquetes) son los que hacen que Binder prepare el entorno automáticamente.
+
+**Alternativa — Posit Cloud:** crea un proyecto en [posit.cloud](https://posit.cloud), sube los archivos, ejecuta `source("install_dependencies.R")` y luego `source("run_all.R")`. Comparte el proyecto con *Access → Public* para obtener un enlace.
 
 ---
 
@@ -153,6 +191,9 @@ burnout-workload-optimization/
 ├── setup.sh                     # instala GLPK + paquetes de R (Linux/macOS)
 ├── install_dependencies.R       # instala/verifica los paquetes de R
 ├── run_all.R                    # orquesta las Fases 1-7 en orden
+├── install.R                    # (Binder) instala los paquetes al construir el entorno
+├── apt.txt                      # (Binder) dependencia de sistema: libglpk-dev
+├── runtime.txt                  # (Binder) versión de R + snapshot de paquetes
 ├── scripts/
 │   ├── Fase_1.R                 # generación del dataset sintético
 │   ├── Fase_2.R                 # EDA
